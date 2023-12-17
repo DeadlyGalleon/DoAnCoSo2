@@ -15,7 +15,7 @@ if(isset($_GET['action']) && $_GET['action']=="xoasanpham" && isset($_GET['sanph
     }
 
     // Chuyển hướng người dùng sau khi xóa sản phẩm khỏi giỏ hàng
-    header("Location: ../trangchu/cart.php");
+    header("Location: ../web/cart.php");
     exit();
 }
 

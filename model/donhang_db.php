@@ -1,4 +1,5 @@
 <?php
+  
 class donhangdb {
 
 
@@ -71,6 +72,51 @@ class donhangdb {
         $listalldonhang = $statement->fetchAll(PDO::FETCH_ASSOC);
     
         return $listalldonhang;
+    }
+
+
+
+    public function dathang($diachi,$sodienthoai) {
+        
+        $idtaikhoan = $_SESSION['idtk'];
+$tongtien = 0; 
+$db = database::getDB();
+
+
+$idtaikhoan = $_SESSION['idtk'];
+$tongtien = 0; 
+
+
+$sql_donhang = "INSERT INTO donhang (idtaikhoan, tongtien, ngaydat, diachi, ngaygiao,sodienthoai, trangthai) VALUES ('$idtaikhoan', '$tongtien', NOW(), '$diachi', '','$sodienthoai', 0)";
+
+if ($db->exec($sql_donhang)) {
+    $iddonhang = $db->lastInsertId();
+
+   
+    if (isset($_SESSION['giohang']) && !empty($_SESSION['giohang'])) {
+        foreach ($_SESSION['giohang'] as $key => $sanpham) {
+            $idsanpham = $sanpham['idsanpham']; 
+            $giacu = $sanpham['giaban']; 
+            $soluong = $sanpham['soluong']; 
+            $thanhtiengiacu = $sanpham['thanhtien']; 
+$tongtien+=  $sanpham['thanhtien'];
+         
+            $sql_sanpham_donhang = "INSERT INTO sanphamdonhang (iddonhang, idsanpham, giacu, soluong, thanhtiengiacu) VALUES ('$iddonhang', '$idsanpham', '$giacu', '$soluong', '$thanhtiengiacu')";
+
+          $db->query($sql_sanpham_donhang);
+             
+       
+        }
+    $querry=  'UPDATE `donhang` SET `tongtien` = '.$tongtien.' WHERE `donhang`.`iddonhang` = '.$iddonhang.'';
+    $db->query($querry);
+        echo "Đã thêm giỏ hàng vào cơ sở dữ liệu thành công!";
+    }
+} else {
+    echo "Lỗi khi thêm đơn hàng!";
+}
+        
+    
+        
     }
     
 

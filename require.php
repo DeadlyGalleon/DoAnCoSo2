@@ -10,6 +10,8 @@ require('model/donhang.php');
 require('model/donhang_db.php');
 require('model/DAO_DB.php');
 require('model/sanphamdonhang.php');
+require('model/taikhoan.php');
+require('model/taikhoan_db.php');
 
 
 ?> 

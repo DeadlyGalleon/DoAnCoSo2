@@ -53,7 +53,7 @@ echo $targetFile;
     } catch (\Throwable $th) {
         echo $th;
     }
-    header('Location: ../trangchu/quanlysanpham.php');
+    header('Location: ../web/quanlysanpham.php');
     exit();
 }
 ?>
