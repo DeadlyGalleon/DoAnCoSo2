@@ -41,7 +41,7 @@ input, button, select, textarea {
        
         <div class="container">
         <div class="row"> 
-            <a href="shop.php">   <button type="submit">Trở Về Trang Chủ</button></a>
+            <a href="../web">   <button type="submit">Trở Về Trang Chủ</button></a>
            
 <a  href="quanlydanhmuc.php"><button type="submit">Quản lý danh mục</button></a>
 
@@ -70,53 +70,51 @@ input, button, select, textarea {
 
                 
                 <?php 
-                $sanphamdb=new sanphamdb();
-                $listallsanpham=$sanphamdb->getallsanphamdesc();
+                $taikhoandb=new taikhoandb();
+                $listalltaikhoan=$taikhoandb->getalltaikhoan();
                 ?> 
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                          
                             <th>Id</th>
-                            <th>Tên</th>
-                            <th>Hình Ảnh</th>
-                            <th>Loại</th>
-                            <th>Hãng</th>
-                            <th>Giá</th>
+                            <th>Tên Tài Khoản</th>
+                            <th>Số Điện Thoại</th>
+                            <th>Là</th>
+                       
                         
                             <th>Hành Động</th>
                         </tr>
                     </thead>
                     
                     <tbody>
-                        <?php foreach($listallsanpham as $sanpham){ ?>
+                        <?php foreach($listalltaikhoan as $taikhoan){ ?>
                             <tr>
                                
-                                <td><?php echo $sanpham->getidsanpham() ?> </td>
-                                <td><?php echo $sanpham->gettensanpham() ?> </td>
-                                <td>
-                                    <img width="auto" src="../image/<?php echo $sanpham->gethinhanh() ?>">
-                                </td>
-                                <td><?php echo $sanpham->gettenloai() ?> </td>
-                                <td><?php echo $sanpham->gettenhang() ?> </td>
+                                <td><?php echo $taikhoan->getidtaikhoan() ?> </td>
+                                <td><?php echo $taikhoan->gettentaikhoan() ?> </td>
+                           
+                                <td><?php echo $taikhoan->getsodienthoai() ?> </td>
+                                <td><?php if($taikhoan->getquanly()===0){
+                                    echo "Khách Hàng";
+                                }else{ echo "Quản Lý";} ?> </td>
 
-                                
-
-                                <td><?php echo $sanpham->getgiaban() ?> vnd</td>
-                                <td>
-                                    <a href="SuaSanPham.php?spid=<?php echo $sanpham->getidsanpham() ?>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
-                                    <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $sanpham->getidsanpham(); ?>)">
+<td>
+                                    <a href="suataikhoan.php?id=<?php echo $taikhoan->getidtaikhoan() ?>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
+                                    <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $taikhoan->getidtaikhoan(); ?>)">
         <i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
                                     </a>
                                     <script>
     function confirmDelete(idSanPham) {
-        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
-            window.location.href = "../control/xoasanpham.php?spid=" + idSanPham;
+        if (confirm("Bạn có chắc chắn muốn xóa tài khoản này không?")) {
+            window.location.href = "../control/xoataikhoan.php?id=" + idSanPham;
         }
     }
 </script>
 
                                 </td>
+
+            
                             </tr>
                       
                         <?php  } ?> 

@@ -96,6 +96,36 @@ foreach($result as $row){
 return $taikhoan;
 
 }
+public function suataikhoan($taikhoanc){
+  
+    $db = database::getDB();
+    $query = 'UPDATE `taikhoan` SET `tentaikhoan` = :tentaikhoan, `matkhau` = :matkhau, `sodienthoai` = :sodienthoai, `quanly` = :quanly WHERE `idtaikhoan` = :idtaikhoan';
+$ten=$taikhoanc->gettentaikhoan();
+$matkhau=$taikhoanc->getmatkhau();
+$sodienthoai=$taikhoanc->getsodienthoai();
+$quanly=$taikhoanc->getquanly();
+$idtaikhoan=$taikhoanc->getidtaikhoan();
+    $statement = $db->prepare($query);
+    $statement->bindParam(':tentaikhoan', $ten);
+    $statement->bindParam(':matkhau',$matkhau);
+    $statement->bindParam(':sodienthoai', $sodienthoai);
+    $statement->bindParam(':quanly', $quanly);
+    $statement->bindParam(':idtaikhoan', $idtaikhoan);
+
+    return $statement->execute();
+}
+
+public function xoataikhoan($id){
+  
+    $db = database::getDB();
+    $query = 'DELETE FROM taikhoan WHERE `idtaikhoan` = :idtaikhoan';
+
+    $statement = $db->prepare($query);
+   
+    $statement->bindParam(':idtaikhoan', $id);
+
+    return $statement->execute();
+}
 
 
 public function dangkitaikhoan($taikhoan){

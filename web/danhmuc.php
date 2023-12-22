@@ -119,10 +119,10 @@ $(document).ready(function() {
                         
                         // Tạo menu cấp 3 bên phải
                         echo '<ul class="dropdown-menu-right active">';
-
+$listhang=$hangdb->gethangbyloai($phukien->getidloai());
 foreach ($listhang as $hang){
 
-    echo '<li><a href="?category_id=' . $phukien->getidloai() . '&brand_id=' . $hang->getidhang() . '">' . $hang->gettenhang() . '</a>';
+    echo '<li><a href="?category_id=' . $phukien->getidloai() . '&brand_id=' . $hang['idhang'] . '">' . $hang['tenhang'] . '</a>';
 }
                         echo '</ul>'; // Đóng mục cấp 3
                         echo '</li>'; // Đóng mục cấp 2
@@ -141,7 +141,7 @@ foreach ($listhang as $hang){
                     $listhang = $hangdb->getallhang();
                     
                     foreach ($listhang as $hang) {
-                        echo '<li><a href="?brands=' . $hang->getidhang() . '">' . $hang->gettenhang() . '</a>';
+                        echo '<li><a href="?brand_id=' . $hang->getidhang() . '">' . $hang->gettenhang() . '</a>';
                         
                      //đóng mục cấp 3
                        

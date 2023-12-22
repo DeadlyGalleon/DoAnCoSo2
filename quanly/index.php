@@ -1,60 +1,29 @@
+<?php 
+require('../require.php');
+?>
+
+
 <!DOCTYPE html>
-<?php session_start(); 
-ob_start();
-
-?> 
-
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shop Bán Hàng</title>
-    
-    <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
-    
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../web/css/owl.carousel.css">
-    <link rel="stylesheet" href="../web/style.css">
-    <link rel="stylesheet" href="../web/css/responsive.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <style>
-    .product-box {
-    border: 1px solid #ccc; /* Đặt màu và độ dày khung viền */
-    border-radius: 5px; /* Đặt góc bo tròn cho khung viền */
-    padding: 10px; /* Đặt khoảng cách giữa nội dung và khung viền */
-    
-}
-
-    .product-col {
-    padding: 10px;
-    text-align: center;
-}
-
-.product-title {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-}
-
-      input[type="submit"], button[type=submit] {
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Quản Lý Sản Phẩm</title>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="css/manager.css" rel="stylesheet">
+        <style>
+            img{
+                width: 200px;
+                height: 120px;
+            }
+            
+input[type="submit"], button[type=submit] {
     background: none repeat scroll 0 0 #435d7d;
     border: medium none;
     color: #fff;
@@ -67,199 +36,199 @@ input, button, select, textarea {
     font-size: inherit;
     line-height: inherit;
 }
-/* CSS cho mã HTML của bạn */
-.col-md-2 {
-  width: 100%;
-  padding: 10px;
-}
-
-.card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-.single-shop-product,
-    .product-box {
-        width: 230px;
-        height: 340px; /* Đã điều chỉnh chiều cao để tránh tràn */
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin: 10px;
-    }
-
-    .single-shop-product .product-upper img,
-    .product-box .product-upper img {
-        max-width: 100%;
-        height: auto;
-        object-fit: contain; /* Để hình ảnh điều chỉnh kích thước tự động trong khung */
-        max-height: 200px; /* Đã điều chỉnh kích thước tối đa */
-    }
-
-    .product-title {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-        margin-top: 10px;
-        font-size: 16px;
-    }
-
-    .product-carousel-price ins {
-        font-weight: bold;
-        color: #435d7d;
-        display: block;
-        margin-top: 10px;
-    }
-
-    .product-option-shop {
-        margin-top: 10px;
-        text-align: center;
-    }
-
-    .add-to-cart-btn {
-        display: block;
-        background-color: #435d7d;
-        color: #fff;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        margin-top: 10px;
-        transition: background-color 0.3s ease;
-    }
-
-    .add-to-cart-btn:hover {
-        background-color: #34495e;
-    }
-    img {
-        max-width: 100%; /* Hình ảnh sẽ không vượt quá chiều rộng của phần tử chứa */
-        height: auto; /* Đảm bảo tỷ lệ chiều cao được duy trì */
-        display: block; /* Loại bỏ khoảng trống dư thừa */
-    }
-    
-  </style>
-  <?php 
-
-if (!isset($_SESSION['giohang']) || empty($_SESSION['giohang'])) {
-
-  $_SESSION['giohang'] = array();
-}
-
-  ?>
-
-
-
-
-  
-
-  <body class="bg-light" >
-   
-
-
-    <?php include 'header.php' ?>
-
-    
-    
-    
-    
-    <div class="site-branding-area">
+        </style>
+    <body>
+       
         <div class="container">
-            <center> <h1>Cửa Hàng Bán Điện thoại, Phụ Kiện</h1></center>
+        <div class="row"> 
+            <a href="../web">   <button type="submit">Trở Về Trang Chủ</button></a>
+           
+<a  href="quanlydanhmuc.php"><button type="submit">Quản lý danh mục</button></a>
+
+<a href="quanlytaikhoan.php"><button type="submit">Quản lý tài khoản</button></a>
+</div> 
+            <div class="row">
+    <div class="col-sm-6">
+        <!-- Thêm ô tìm kiếm -->
+        <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sản phẩm...">
+    </div>
+    <!-- ... (các cột khác) ... -->
+</div>
+
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2>Quản Lý <b>Sản Phẩm</b></h2>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#addsanpham"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm Sản Phẩm</span></a>
+                           						
+                        </div>
+                    </div>
+                </div>
+
+                
+                <?php 
+                $sanphamdb=new sanphamdb();
+                $listallsanpham=$sanphamdb->getallsanphamdesc();
+                ?> 
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                         
+                            <th>Id</th>
+                            <th>Tên</th>
+                            <th>Hình Ảnh</th>
+                            <th>Loại</th>
+                            <th>Hãng</th>
+                            <th>Giá</th>
+                        
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <?php foreach($listallsanpham as $sanpham){ ?>
+                            <tr>
+                               
+                                <td><?php echo $sanpham->getidsanpham() ?> </td>
+                                <td><?php echo $sanpham->gettensanpham() ?> </td>
+                                <td>
+                                    <img width="auto" src="../image/<?php echo $sanpham->gethinhanh() ?>">
+                                </td>
+                                <td><?php echo $sanpham->gettenloai() ?> </td>
+                                <td><?php echo $sanpham->gettenhang() ?> </td>
+
+                                
+
+                                <td><?php echo $sanpham->getgiaban() ?> vnd</td>
+                                <td>
+                                    <a href="SuaSanPham.php?spid=<?php echo $sanpham->getidsanpham() ?>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
+                                    <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $sanpham->getidsanpham(); ?>)">
+        <i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+                                    </a>
+                                    <script>
+    function confirmDelete(idSanPham) {
+        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+            window.location.href = "../control/xoasanpham.php?spid=" + idSanPham;
+        }
+    }
+</script>
+
+                                </td>
+                            </tr>
+                      
+                        <?php  } ?> 
+                    </tbody>
+                </table>
+             
+            </div>
+          
+
         </div>
-    </div> <!-- End site branding area -->
-    
-   
-   
-
-
-
-   
-  
-<?php include '../web/danhmuc.php' ?>
-
-
-
-<?php include '../web/shop.php' ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php include '../web/footer.php' ?> 
-   
-   
-   <!-- Latest jQuery form server -->
-   <script src="https://code.jquery.com/jquery.min.js"></script>
-   
-   <!-- Bootstrap JS form CDN -->
-   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-   
-   <!-- jQuery sticky menu -->
-   <script src="../web/js/owl.carousel.min.js"></script>
-   <script src="../web/js/jquery.sticky.js"></script>
-   
-   <!-- jQuery easing -->
-   <script src="js/jquery.easing.1.3.min.js"></script>
-   
-   <!-- Main Script -->
-   <script src="../web/js/main.js"></script>
-   <script>
-       $(document).ready(function() {
-   $('.add-to-cart-btn').click(function(event) {
-       event.preventDefault();
-       var spid = $(this).data('spid'); // Lấy ID sản phẩm từ thuộc tính dữ liệu
-
-       $.ajax({
-           type: 'GET',
-           url: '../control/themvaogiohang.php?sanphamid=' + spid,
-           success: function(response) {
-               // Hiển thị thông báo khi thêm sản phẩm vào giỏ hàng thành công
-               alert('Sản phẩm đã được thêm vào giỏ hàng!');
-           },
-           error: function() {
-               alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.');
-           }
-       });
-   });
-});
-
+        <!-- Edit Modal HTML -->
         
-   </script>
- </body>
+        
+        
+        
+        
+<div id="addsanpham" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="addsanphamform" action="../control/themsanpham.php" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm Sản Phẩm</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Tên</label>
+                        <input name="name" type="text" class="form-control" required>
+                    </div>
+                   <div class="form-group">
+    <label>Hình Ảnh</label>
+    <input name="image" type="file" class="form-control-file">
+</div>
+<div class="form-group">
+                        <label>Hình Ảnh Chi Tiết</label>
+                        <input name="imagechitiet[]" type="file" class="form-control-file" multiple>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Giá Bán</label>
+                        <input id="price" name="price" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mô Tả</label>
+                        <textarea name="mota" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Loại Sản Phẩm</label>
+                        <select name="category" class="form-select" aria-label="Default select example">
+                          
+                                <?php $loaidb=new loaidb();
+                                $listallloai=$loaidb->getallloai();
+                                foreach($listallloai as $loai){    ?> 
+                                <option value="<?php echo $loai->getidloai() ?>"><?php echo $loai->gettenloai() ?></option>
+                           <?php } ?>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Hãng Sản Phẩm</label>
+                        <select name="brands" class="form-select" aria-label="Default select example">
+                          
+                                <?php $hangdb=new hangdb();
+                                $listallhang=$hangdb->getallhang();
+                                foreach($listallhang as $hang){    ?> 
+                                <option value="<?php echo $hang->getidhang() ?>"><?php echo $hang->gettenhang() ?></option>
+                           <?php } ?>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Trở Lại">
+                    <input type="submit" class="btn btn-success" value="Thêm">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<?php
+
+?>
+
+        <script>
+          
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lắng nghe sự kiện khi form được gửi
+        document.getElementById('addsanphamform').addEventListener('submit', function(event) {
+            var priceInput = document.getElementById('price');
+            var priceValue = priceInput.value;
+
+            // Kiểm tra nếu giá trị không phải số nguyên
+            if (!Number.isInteger(Number(priceValue))) {
+                // Ngăn chặn gửi biểu mẫu
+                event.preventDefault();
+                // Hiển thị thông báo lỗi
+                alert('Giá bán phải là một số nguyên.');
+                // Đặt lại giá trị của ô nhập liệu giá bán
+                priceInput.value = '';
+                // Tập trung vào ô nhập liệu giá bán
+                priceInput.focus();
+            }
+        });
+    });
+
+
+        </script>
+        <script src="js/ajax.js"></script>
+        
+        
+    <script src="js/manager.js" type="text/javascript"></script>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -90,6 +90,17 @@ $(document).ready(function(){
 });
 
 
+
+
+
+
+
+
+
+
+///// Tính Tổng Tiền
+
+
 $(document).ready(function() {
     // Hàm để tính tổng tiền
     function calculateTotal() {

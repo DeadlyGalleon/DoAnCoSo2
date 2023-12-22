@@ -11,20 +11,20 @@ if(isset($_SESSION['idtk'])) {?>
     <title>Giỏ Hàng</title>
     
     <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
-    
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+        <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+        
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="css/owl.carousel.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
@@ -58,6 +58,7 @@ if(isset($_SESSION['idtk'])) {?>
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
+
         <table cellspacing="0" class="shop_table cart">
             <thead>
                 <tr>
@@ -90,7 +91,7 @@ if(isset($_SESSION['idtk'])) {?>
                 </td>
         
                 <td class="product-name">
-                    <a href="single-product.html">'.$sanpham['tensanpham'].'</a> 
+                    <a href="ttsanpham.php?spid='.$sanpham['idsanpham'].'">'.$sanpham['tensanpham'].'</a> 
                 </td>
         
                 <td class="product-price">
@@ -98,10 +99,10 @@ if(isset($_SESSION['idtk'])) {?>
                 </td>
         
                 <td class="product-quantity">
-                <button class="giamsoluong-btn" data-spid="'.$sanpham['idsanpham'].'">-</button>
+
                     
                 <span class="quantity-text">'.$sanpham['soluong'].'</span>
-                <button class="themsoluong-btn" data-spid="'.$sanpham['idsanpham'].'">+</button>
+               
             </td>
         
                 <td class="product-subtotal">
@@ -144,19 +145,22 @@ echo'
            
         </table>
         
-      <?php if(isset($_SESSION['taikhoan'])){?> 
-                                            <a href="../control/dathang.php"> <input type="submit" value="Đặt Hàng" name="proceed" class="checkout-button button alt wc-forward"></a> 
-                 
-                                            <?php }else{ ?>
 
-         <center><h3>Hãy Đăng Nhập Để Mua Hàng!</h3></center>
-                                            
-              
                                            
+                                            <form method="post" action="../control/dathang.php">
+            <div class="form-group">
+                <label for="diachi">Địa chỉ:</label>
+                <input type="text" class="form-control" id="diachi" name="diachi" placeholder="Nhập địa chỉ của bạn" required>
+            </div>
+            <div class="form-group">
+                <label for="sodienthoai">Số điện thoại:</label>
+                <input type="text" value="<?php echo $taikhoan->getsodienthoai() ?> " class="form-control" id="sodienthoai" name="sodienthoai" placeholder="Nhập số điện thoại của bạn" required>
+            </div>
 
-
-                                            
-                                            <?php }?>
+            <!-- Nút Đặt Hàng -->
+          <input type="submit" value="Đặt Hàng" name="proceed" class="checkout-button button alt wc-forward"></input>
+        </form>
+                                 
 
               
     </div>

@@ -31,6 +31,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    if (isset($_FILES['imagechitiet'])) {
+        $db= database::getDB();
+        
+        $total_images_detail = count($_FILES['imagechitiet']['name']);
+    
+ $querry='DELETE FROM hinhanh WHERE idsanpham ='.$idSanPham.'';
+    $db->query($querry);
+        // Lưu hình ảnh chi tiết vào bảng hinhanh
+        for ($j = 0; $j < $total_images_detail; $j++) {
+            $file_name_detail = $_FILES['imagechitiet']['name'][$j];
+            $file_tmp_detail = $_FILES['imagechitiet']['tmp_name'][$j];
+    
+            $query_detail = "INSERT INTO `hinhanh` (`idsanpham`, `hinhanh`) VALUES (:idsanpham, :hinhanh)";
+            $statement_detail = $db->prepare($query_detail);
+            $statement_detail->bindParam(':idsanpham', $idSanPham); // ID sản phẩm tương ứng
+            $statement_detail->bindParam(':hinhanh', $file_name_detail);
+            $statement_detail->execute();
+    
+            // Di chuyển hình ảnh chi tiết vào thư mục lưu trữ (nếu cần)
+            move_uploaded_file($file_tmp_detail, '../image/' . $file_name_detail);
+        }
+    }
+
+
     // Tạo một đối tượng sản phẩm với dữ liệu mới
     $sanPhamUpdate = new sanpham();
     $sanPhamUpdate->setidsanpham($idSanPham);
@@ -46,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Cập nhật thông tin sản phẩm trong cơ sở dữ liệu
     if ($sanphamdb->suasanpham($sanPhamUpdate)) {
         // Nếu cập nhật thành công, bạn có thể chuyển hướng người dùng đến một trang khác hoặc thực hiện hành động mong muốn
-        header('Location: ../TrangChu/quanlysanpham.php');
+        header('Location: ../quanly/');
         exit();
     } else {
         // Xử lý lỗi nếu cập nhật không thành công

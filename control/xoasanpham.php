@@ -10,7 +10,7 @@ if (isset($_GET['spid'])) {
     $sanphamdb->xoasanpham($idSanPham);
 
     // Sau khi xóa thành công, bạn có thể chuyển hướng người dùng đến trang quản lý sản phẩm hoặc trang nào đó khác.
-    header('Location: ../web/quanlysanpham.php');
+    header('Location: ../quanly/quanlysanpham.php');
     exit();
 }
 ?>

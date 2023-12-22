@@ -23,44 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sanPhamUpdate->setloai($loaiSanPham);
     $sanPhamUpdate->sethang($hangSanPham);
 
-    // Cập nhật thông tin sản phẩm trong cơ sở dữ liệu
-    if ($sanphamdb->suasanpham($sanPhamUpdate)) {
-        // Kiểm tra và xử lý hình ảnh khi có file được tải lên
-    
-        if (isset($_FILES['new_image']) && $_FILES['new_image']['error'] === UPLOAD_ERR_OK) {
-            
-            $newImage = $_FILES['new_image']['name'];
-            $targetDirectory = "../image/";
-            $targetFile = $targetDirectory . basename($_FILES["new_image"]["name"]);
-
-            if (move_uploaded_file($_FILES["new_image"]["tmp_name"], $targetFile)) {
-            
-                // Lấy thông tin sản phẩm cần cập nhật
-                $sanpham = $sanphamdb->getsanphambyid($idSanPham);
-                $oldImage = $sanpham->gethinhanh();
-
-                // Xóa hình ảnh cũ
-                unlink($targetDirectory . $oldImage);
-
-                // Cập nhật hình ảnh mới cho sản phẩm
-                $sanphamdb->suahinhanh($idSanPham, $newImage);
-                
-                // Chuyển hướng sau khi cập nhật thành công
-                
-               
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-           
-        }
-
-        header('Location: ../trangchu/quanlysanpham.php');
+  
+  
+        header('Location: ../quanly/');
         exit();
     } else {
         // Xử lý lỗi nếu cập nhật thông tin sản phẩm không thành công
         echo "Có lỗi xảy ra trong quá trình cập nhật thông tin sản phẩm.";
     }
-}
+
 ?>
 
 
@@ -102,7 +73,7 @@ $sanpham=$sanphamdb->getsanphambyid($_GET['spid']);
            <div id="SuaSanPhamForm" >
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form  method="POST" enctype="multipart/form-data">
+                    <form  action="../control/suasanpham.php" method="POST" enctype="multipart/form-data">
                         <div class="modal-header">						
                             <h4 class="modal-title">Sửa Sản Phẩm</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -121,6 +92,42 @@ $sanpham=$sanphamdb->getsanphambyid($_GET['spid']);
     <img src="../image/<?php echo $sanpham->gethinhanh(); ?>" id="previewImage" alt="Current Image" class="preview-image">
     <input name="new_image" type="file" class="form-control-file" id="newImageInput">
 </div>
+<div class="form-group">
+    <label>Hình Ảnh Chi Tiết Hiện Có</label>
+    <div class="current-images">
+        <?php
+        // Lấy danh sách hình ảnh chi tiết hiện có của sản phẩm
+        $listChiTietHienCo = $sanphamdb->gethinhanhbyidsanpham($sanpham->getidsanpham());
+
+        foreach ($listChiTietHienCo as $hinhAnh) {
+            echo '<img src="../image/' . $hinhAnh['hinhanh']. '" width="100" height="100" alt="Image">';
+        }
+        ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Hình Ảnh Chi Tiết Mới</label>
+    <input name="imagechitiet[]" type="file" class="form-control-file" multiple>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
     document.getElementById('newImageInput').addEventListener('change', function() {
         var input = this;
@@ -216,6 +223,31 @@ $sanpham=$sanphamdb->getsanphambyid($_GET['spid']);
     function isInteger(value) {
         return /^-?\d+$/.test(value);
     }
+
+
+    document.getElementById('newImageInput').addEventListener('change', function() {
+        var input = this;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewImage').setAttribute('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        var files = input.files;
+        var imagesDiv = document.querySelector('.current-images');
+
+        for (var i = 0; i < files.length; i++) {
+            var image = document.createElement('img');
+            image.src = URL.createObjectURL(files[i]);
+            image.width = 100;
+            image.height = 100;
+            image.alt = 'Image';
+            imagesDiv.appendChild(image);
+        }
+    });
+
 </script>
         
         

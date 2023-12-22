@@ -87,11 +87,11 @@
                 </td>
         
                 <td class="product-name">
-                    <a href="single-product.html">'.$sanpham['tensanpham'].'</a> 
+                    <a href="ttsanpham.php?spid='.$sanpham['idsanpham'].'">'.$sanpham['tensanpham'].'</a> 
                 </td>
         
                 <td class="product-price">
-                    <span class="amount">'.$sanpham['giaban'].' vnd</span> 
+                    <span class="amount">'.$sanpham['giaban'].' VNĐ</span> 
                 </td>
         
                 <td class="product-quantity">
@@ -102,7 +102,7 @@
             </td>
         
                 <td class="product-subtotal">
-                    <span class="amount">'.$sanpham['thanhtien'].' vnd</span>
+                    <span class="amount">'.$sanpham['thanhtien'].' VNĐ</span>
                 </td>
                 <td class="product-remove">
                 <a title="Xóa sản phẩm này" class="remove-item" data-spid="'.$sanpham['idsanpham'].'" " href="#">&#10006;</a>
@@ -115,22 +115,7 @@
             </tr>
         </tbody>';
         }
-echo'
-<tfoot>
-    <tr class="cart_item">
-        <td class="product-remove"></td>
-        <td class="product-thumbnail"></td>
-        <td class="product-name"></td>
-        <td class="product-price"></td>
-        <td class="product-quantity">Tổng:</td>
-        <td class="product-subtotal">
-            <span id="tong-tien"></span>
-        </td>
-        <td class="product-remove"></td>
-    </tr>
-</tfoot>
-    
-    ';
+
     } else {
         echo 'Giỏ hàng của bạn đang trống.';
     }
@@ -141,10 +126,10 @@ echo'
            
         </table>
         
-      <?php if(isset($_SESSION['taikhoan'])){?> 
+      <?php if(isset($_SESSION['taikhoan']) && !empty($_SESSION['giohang'])){?> 
                                             <a href="dathang.php"> <input type="submit" value="Đặt Hàng" name="proceed" class="checkout-button button alt wc-forward"></a> 
                  
-                                            <?php }else{ ?>
+                                            <?php }elseif(!isset($_SESSION['taikhoan'])){ ?>
 
          <center><h3>Hãy Đăng Nhập Để Mua Hàng!</h3></center>
                                             

@@ -176,7 +176,7 @@ if (!isset($_SESSION['giohang']) || empty($_SESSION['giohang'])) {
 
    
   
-<?php include '../web/danhmuc.php' ?>
+<?php include '../web/danhmuc2.php' ?>
 
 
 

@@ -42,7 +42,7 @@ if (isset($_SESSION['taikhoan'])) {
                      }?> 
                                     
                             <?php if($taikhoan->getadmin()==1){ ?> 
-                             <li><a href="quanlysanpham.php"><i class="fa fa-user"></i> Trang Quản Lý</a></li>
+                             <li><a href="../quanly/"><i class="fa fa-user"></i> Trang Quản Lý</a></li>
                                
                                 
                                     <?php }?> 

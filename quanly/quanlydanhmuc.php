@@ -38,15 +38,27 @@ input, button, select, textarea {
 }
         </style>
     <body>
+       
         <div class="container">
-            <a href="shop.php">   <button type="submit">Trở Về Trang Chủ</button></a>
+        <div class="row"> 
+            <a href="../web">   <button type="submit">Trở Về Trang Chủ</button></a>
+           
+<a  href="quanlydanhmuc.php"><button type="submit">Quản lý danh mục</button></a>
+
+<a href="quanlytaikhoan.php"><button type="submit">Quản lý tài khoản</button></a>
+<a href="quanlydonhang.php"><button type="submit">Quản lý đơn hàng</button></a>
+</div> 
             <div class="row">
-    <div class="col-sm-6">
-        <!-- Thêm ô tìm kiếm -->
-        <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sản phẩm...">
-    </div>
+ 
     <!-- ... (các cột khác) ... -->
 </div>
+<?php 
+                $loaidb=new loaidb();
+                $listallloai=$loaidb->getallloai();
+                $hangdb=new hangdb();
+                $listallhang=$hangdb->getallhang();
+$listlienket=$hangdb->getalllienket();
+                ?> 
 
             <div class="table-wrapper">
                 <div class="table-title">
@@ -54,27 +66,28 @@ input, button, select, textarea {
                         <div class="col-sm-6">
                             <h2>Quản Lý <b>Danh Mục</b></h2>
                         </div>
-                        <div class="col-sm-6">
-                            <a href="#addsanpham"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm Sản Phẩm</span></a>
-                           						
-                        </div>
+                      
                     </div>
                 </div>
+                </div>
+      
+                <div class="row">
 
-                
-                <?php 
-                $loaidb=new loaidb();
-                $listallloai=$loaidb->getallloai();
-                ?> 
+                <div class="col-sm-6">
+                <div class="table-wrapper">
+                    
+                <div class="col-sm-3">
+                <h4><b>Loại</b></h4>
+                </div>
+                <div class="col-sm-3">
+              <right><a href="#addloai"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm</span></a></right>  
+                </div>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                          
-                            <th>Id</th>
-                         
-                            <th>Loại</th>
-                          
-                        
+                            <th>Id Loại</th>
+                            <th>Tên Loại</th>
                             <th>Hành Động</th>
                         </tr>
                     </thead>
@@ -85,19 +98,15 @@ input, button, select, textarea {
                                
                                 <td><?php echo $loai->getidloai() ?> </td>
                                 <td><?php echo $loai->gettenloai() ?> </td>
-                          
+                        
+
+            
                                 <td>
-                                    <a href="SuaSanPham.php?spid=<?php echo $loai->getidloai(); ?>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
-                                    <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $loai->getidloai(); ?>)">
-        <i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
-                                    </a>
-                                    <script>
-    function confirmDelete(idSanPham) {
-        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
-            window.location.href = "../control/xoasanpham.php?spid=" + idSanPham;
-        }
-    }
-</script>
+                                    <a href="sualoai.php?id=<?php echo $loai->getidloai() ?>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
+                                    <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $loai->getidloai(); ?>, 'loai')">
+    <i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+</a>
+
 
                                 </td>
                             </tr>
@@ -105,45 +114,196 @@ input, button, select, textarea {
                         <?php  } ?> 
                     </tbody>
                 </table>
+
+                </div>
+
+</div>
+                <div class="col-sm-6">
+                <div class="table-wrapper">
+                    
+                <div class="col-sm-3">
+                <h4><b>Hãng</b></h4>
+                </div>
+                <div class="col-sm-3">
+              <right><a href="#addhang"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm</span></a></right>  
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                         
+                            <th>Id Loại</th>
+                            <th>Tên Loại</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <?php foreach($listallhang as $hang){ ?>
+                            <tr>
+                               
+                                <td><?php echo $hang->getidhang() ?> </td>
+                                <td><?php echo $hang->gettenhang() ?> </td>
+                                <td>
+                                    <a href="suahang.php?id=<?php echo $hang->getidhang() ?>"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
+                                    <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $hang->getidhang(); ?>, 'hang')">
+    <i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+</a>
+
+                                </td>
+                            </tr>
+                      
+                        <?php  } ?> 
+                    </tbody>
+                </table> 
+
+                </div>
              
-            </div>
+              
+
+
+
+
+
+
+
+                
+           
+             
+    
           
 
-        </div>
-        <!-- Edit Modal HTML -->
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+      
         
+        <div class="row">
+        <div class="table-wrapper">
+                    
+                    <div class="col-sm-6">
+                    <h4><b>Liên Kết</b></h4>
+                    </div>
+                    <div class="col-sm-6">
+                  <right><a href="#addlienket"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm</span></a></right>  
+                    </div>
+         
+        <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                         
+                            <th>Id Loại</th>
+                            <th>Tên Loại</th>
+                            <th></th>
+                            <th>Id Hãng</th>
+                            <th>Tên Hãng</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <?php foreach($listlienket as $row){ ?>
+                            <tr>
+                               
+                                <td><?php echo $row['idloai'] ?> </td>
+                                <td><?php echo $row['tenloai'] ?> </td>
+                                <th></th>
+                                <td><?php echo $row['idhang'] ?> </td>
+                                <td><?php echo $row['tenhang'] ?> </td>
+
+                     
+
+                                
+
+                        
+                                <td>
+                                 
+                                <a href="javascript:void(0);" onclick="confirmDelete([<?php echo $row['idloai']; ?>, <?php echo $row['idhang']; ?>], 'lienket')">
+    <i class="material-icons" data-toggle="tooltip" title="Xóa">&#xE872;</i>
+</a>
+
+                                </td>
+                            </tr>
+                      
+                        <?php  } ?> 
+                    </tbody>
+                </table> 
+
+
+
+
+                </div> 
+            
+            </div>
         
-        
-        
-        
-<div id="addsanpham" class="modal fade">
+<div id="addloai" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="addsanphamform" action="../control/themsanpham.php" method="post" enctype="multipart/form-data">
+            <form id="addsanphamform" action="../control/themloai.php" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h4 class="modal-title">Thêm Loại</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Tên</label>
-                        <input name="name" type="text" class="form-control" required>
+                        <label>Tên Loại</label>
+                        <input name="nameloai" type="text" class="form-control" required>
                     </div>
-                   <div class="form-group">
-    <label>Hình Ảnh</label>
-    <input name="image" type="file" class="form-control-file">
+                 
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Trở Lại">
+                    <input type="submit" class="btn btn-success" value="Thêm">
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
+<div id="addhang" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="addsanphamform" action="../control/themhang.php" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm Hãng</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
                     <div class="form-group">
-                        <label>Giá Bán</label>
-                        <input id="price" name="price" type="text" class="form-control" required>
+                        <label>Tên</label>
+                        <input name="namehang" type="text" class="form-control" required>
                     </div>
+                  
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Trở Lại">
+                    <input type="submit" class="btn btn-success" value="Thêm">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="addlienket" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="addsanphamform" action="../control/themlienket.php" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm Liên Kết</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+            
                     <div class="form-group">
-                        <label>Mô Tả</label>
-                        <textarea name="mota" class="form-control" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Loại Sản Phẩm</label>
+                        <label>Loại</label>
                         <select name="category" class="form-select" aria-label="Default select example">
                           
                                 <?php $loaidb=new loaidb();
@@ -155,7 +315,7 @@ input, button, select, textarea {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Hãng Sản Phẩm</label>
+                        <label>Hãng</label>
                         <select name="brands" class="form-select" aria-label="Default select example">
                           
                                 <?php $hangdb=new hangdb();
@@ -177,37 +337,51 @@ input, button, select, textarea {
 </div>
 
 
-<?php
-
-?>
-
-        <script>
-          
-    document.addEventListener('DOMContentLoaded', function() {
-        // Lắng nghe sự kiện khi form được gửi
-        document.getElementById('addsanphamform').addEventListener('submit', function(event) {
-            var priceInput = document.getElementById('price');
-            var priceValue = priceInput.value;
-
-            // Kiểm tra nếu giá trị không phải số nguyên
-            if (!Number.isInteger(Number(priceValue))) {
-                // Ngăn chặn gửi biểu mẫu
-                event.preventDefault();
-                // Hiển thị thông báo lỗi
-                alert('Giá bán phải là một số nguyên.');
-                // Đặt lại giá trị của ô nhập liệu giá bán
-                priceInput.value = '';
-                // Tập trung vào ô nhập liệu giá bán
-                priceInput.focus();
-            }
-        });
-    });
 
 
-        </script>
+
+</div>
+
+
+
+
         <script src="js/ajax.js"></script>
         
         
     <script src="js/manager.js" type="text/javascript"></script>
 </body>
 </html>
+<!-- ... (previous HTML code) ... -->
+
+<script>
+    function confirmDelete(id, type) {
+        let confirmMessage = "";
+        switch (type) {
+            case 'loai':
+                confirmMessage = "Bạn có chắc chắn muốn xóa loại này không?";
+                break;
+            case 'hang':
+                confirmMessage = "Bạn có chắc chắn muốn xóa hãng này không?";
+                break;
+            case 'lienket':
+                confirmMessage = "Bạn có chắc chắn muốn xóa liên kết này không?";
+                break;
+            default:
+                confirmMessage = "Bạn có chắc chắn muốn xóa?";
+        }
+
+        if (confirm(confirmMessage)) {
+            // Modify the URL based on the type of deletion
+            let url = "";
+            if (type === 'lienket') {
+                // If it's a 'lienket', handle it differently
+                window.location.href = "../control/xoalienket.php?idloai=" + id[0] + "&idhang=" + id[1];
+            } else {
+                url = type === 'loai' ? "../control/xoaloai.php?id=" : "../control/xoahang.php?id=";
+                window.location.href = url + id;
+            }
+        }
+    }
+</script>
+
+<!-- ... (rest of your HTML code) ... -->

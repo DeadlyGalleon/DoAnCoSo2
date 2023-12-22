@@ -39,7 +39,7 @@ class dao {
 
         // Thực thi truy vấn
         if ($stmt->execute()) {
-            echo "Sản phẩm đã được thêm vào cơ sở dữ liệu thành công.";
+            return $db->lastInsertId();
         } else {
             echo "Lỗi khi thêm sản phẩm.";
         }

@@ -41,7 +41,7 @@ input, button, select, textarea {
        
         <div class="container">
         <div class="row"> 
-            <a href="shop.php">   <button type="submit">Trở Về Trang Chủ</button></a>
+            <a href="../web">   <button type="submit">Trở Về Trang Chủ</button></a>
            
 <a  href="quanlydanhmuc.php"><button type="submit">Quản lý danh mục</button></a>
 
@@ -150,6 +150,10 @@ input, button, select, textarea {
     <label>Hình Ảnh</label>
     <input name="image" type="file" class="form-control-file">
 </div>
+<div class="form-group">
+                        <label>Hình Ảnh Chi Tiết</label>
+                        <input name="imagechitiet[]" type="file" class="form-control-file" multiple>
+                    </div>
 
                     <div class="form-group">
                         <label>Giá Bán</label>

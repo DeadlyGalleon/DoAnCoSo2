@@ -1,14 +1,27 @@
 <?php session_start();
 require('../require.php');
-$donhangdb=new donhangdb();
-$diachi='109 ngo xuan thu';
-$sdt='0702723017';
-$donhangdb->dathang($diachi,$sdt);
+
+
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $donhangdb=new donhangdb();
+    $diachi=$_POST['diachi'];
+
+ $sodienthoai=$_POST['sodienthoai'];
+try {
+    //code...
+$donhangdb->dathang($diachi,$sodienthoai);
+unset($_SESSION['giohang']);
+ echo ' <script>';
+  echo '  alert("Đặt Hàng Thành Công!");';
+  echo "  window.location.href = '../web/';";
+
+     echo '    </script>;';
+} catch (\Throwable $th) {
+    echo "có lỗi khi đặt hàng, mời thử lại";
+}
+  }
 
 ?> 
 
-<script>
-    alert("Đặt Hàng Thành Công!");
-    window.location.href = '../web/shop.php';
-
-</script>
