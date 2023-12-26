@@ -79,7 +79,7 @@ echo $targetFile;
     } catch (\Throwable $th) {
         echo $th;
     }
-    header('Location: ../web/quanlysanpham.php');
+    header('Location: ../quanly/');
     exit();
 }
 ?>

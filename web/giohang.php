@@ -143,6 +143,7 @@
               
     </div>
 </div>
+<?php include('footer.php'); ?> 
 
 
 <!-- Các phần khác của trang -->

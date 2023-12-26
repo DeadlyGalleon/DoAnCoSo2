@@ -110,6 +110,30 @@ $sanpham=$sanphamdb->getsanphambyid($_GET['spid']);
     <label>Hình Ảnh Chi Tiết Mới</label>
     <input name="imagechitiet[]" type="file" class="form-control-file" multiple>
 </div>
+<script>
+    document.getElementById('newImageInput').addEventListener('change', function() {
+        var input = this;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewImage').setAttribute('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        var files = input.files;
+        var imagesDiv = document.querySelector('.current-images');
+
+        for (var i = 0; i < files.length; i++) {
+            var image = document.createElement('img');
+            image.src = URL.createObjectURL(files[i]);
+            image.width = 100;
+            image.height = 100;
+            image.alt = 'Image';
+            imagesDiv.appendChild(image);
+        }
+    });
+</script>
 
 
 
@@ -225,28 +249,7 @@ $sanpham=$sanphamdb->getsanphambyid($_GET['spid']);
     }
 
 
-    document.getElementById('newImageInput').addEventListener('change', function() {
-        var input = this;
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('previewImage').setAttribute('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-
-        var files = input.files;
-        var imagesDiv = document.querySelector('.current-images');
-
-        for (var i = 0; i < files.length; i++) {
-            var image = document.createElement('img');
-            image.src = URL.createObjectURL(files[i]);
-            image.width = 100;
-            image.height = 100;
-            image.alt = 'Image';
-            imagesDiv.appendChild(image);
-        }
-    });
+    
 
 </script>
         

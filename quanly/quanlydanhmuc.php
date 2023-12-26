@@ -1,7 +1,12 @@
 <?php 
 require('../require.php');
-?>
+session_start();
+if(isset($_SESSION['idtk'])){
+$taikhoandb=new taikhoandb();
+$taikhoan=$taikhoandb->gettaikhoan($_SESSION['idtk']);
+if($taikhoan->getquanly()==1 || $taikhoan->getadmin()==1){
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,9 +48,11 @@ input, button, select, textarea {
         <div class="row"> 
             <a href="../web">   <button type="submit">Trở Về Trang Chủ</button></a>
            
-<a  href="quanlydanhmuc.php"><button type="submit">Quản lý danh mục</button></a>
+<a  href="../quanly/"><button type="submit">Quản lý Sản Phẩm</button></a>
+<?php if($taikhoan->getadmin()==1){ ?>
 
 <a href="quanlytaikhoan.php"><button type="submit">Quản lý tài khoản</button></a>
+<?php }?> 
 <a href="quanlydonhang.php"><button type="submit">Quản lý đơn hàng</button></a>
 </div> 
             <div class="row">
@@ -385,3 +392,8 @@ $listlienket=$hangdb->getalllienket();
 </script>
 
 <!-- ... (rest of your HTML code) ... -->
+<?php 
+
+}
+}
+?> 

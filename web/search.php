@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<?php session_start(); ?> 
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -90,7 +90,7 @@ h2 a {
 
 .product-carousel-price ins {
   font-weight: bold;
-  color: #ff0000;
+  color: #34495e;
 }
 
 .product-option-shop a.add_to_cart_button {
@@ -120,6 +120,20 @@ h2 a {
   margin-top: 10px;
   text-align: center;
 }
+.add-to-cart-btn {
+        display: block;
+        background-color: #435d7d;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-to-cart-btn:hover {
+        background-color: #34495e;
+    }
 
 
   </style>
@@ -155,7 +169,7 @@ h2 a {
 
 
     <?php include 'danhmuc2.php' ?>
-<?php include 'danhmuc.php' ?>
+
 
     
     
@@ -198,11 +212,11 @@ foreach ($listallsanpham as $sanpham) {
     echo '        </div>';
     echo '        <h2 class="product-title"><a href="ttsanpham.php?spid='. $sanpham->getidsanpham() .'">' . $sanpham->gettensanpham() . '</a></h2>';
     echo '        <div class="product-carousel-price">';
-    echo '            <ins>' . $sanpham->getgiaban() . ' vnd</ins>';
+    echo '            <ins>' . $sanpham->getgiaban() . ' VNĐ</ins>';
     echo '        </div>';
     echo '        <div class="product-option-shop">';
     echo '            <c:url value="/shop/addtocart?spid=' . $sanpham->getidsanpham() . '" var="addtocart"/>';
-    echo '            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="' . $sanpham->getidsanpham() . '" rel="nofollow" href="">Thêm Vào Giỏ Hàng</a>';
+    echo '           <a class="add-to-cart-btn" data-quantity="1" data-spid="'.$sanpham->getidsanpham().'" data-product_sku="" data-product_id="' . $sanpham->getidsanpham() . '" rel="nofollow" href="#">Thêm Vào Giỏ Hàng</a>';
     echo '        </div>';
     echo '    </div>';
     echo '</div>';
@@ -246,3 +260,46 @@ echo '</div>';
     </script>
   </body>
 </html>
+
+<script>
+$(document).ready(function() {
+    $('.add_to_cart_button').click(function(event) {
+        event.preventDefault();
+        var spid = $(this).attr('data-spid'); // Lấy ID sản phẩm từ thuộc tính dữ liệu
+
+        $.ajax({
+            type: 'GET',
+            url: '../control/themvaogiohang.php?sanphamid=' + spid,
+            success: function(response) {
+                // Hiển thị thông báo khi thêm sản phẩm vào giỏ hàng thành công
+                alert('Sản phẩm đã được thêm vào giỏ hàng!');
+            },
+            error: function() {
+                alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.');
+            }
+        });
+    });
+});
+
+
+$(document).ready(function() {
+   $('.add-to-cart-btn').click(function(event) {
+       event.preventDefault();
+       var spid = $(this).data('spid'); // Lấy ID sản phẩm từ thuộc tính dữ liệu
+
+       $.ajax({
+           type: 'GET',
+           url: '../control/themvaogiohang.php?sanphamid=' + spid,
+           success: function(response) {
+               // Hiển thị thông báo khi thêm sản phẩm vào giỏ hàng thành công
+               alert('Sản phẩm đã được thêm vào giỏ hàng!');
+           },
+           error: function() {
+               alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.');
+           }
+       });
+   });
+});
+
+        
+   </script>

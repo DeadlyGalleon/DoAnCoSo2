@@ -1,5 +1,11 @@
 <?php 
 require('../require.php');
+session_start();
+if(isset($_SESSION['idtk'])){
+$taikhoandb=new taikhoandb();
+$taikhoan=$taikhoandb->gettaikhoan($_SESSION['idtk']);
+if($taikhoan->getadmin()==1){
+
 ?>
 
 
@@ -40,13 +46,19 @@ input, button, select, textarea {
     <body>
        
         <div class="container">
-        <div class="row"> 
-            <a href="../web">   <button type="submit">Trở Về Trang Chủ</button></a>
+        <div class="row">
+        <a href="../web">   <button type="submit">Trở Về Trang Chủ</button></a>
            
-<a  href="quanlydanhmuc.php"><button type="submit">Quản lý danh mục</button></a>
+           <a  href="../quanly"><button type="submit">Quản lý Sản Phẩm</button></a>
+           <?php if($taikhoan->getadmin()==1){ ?>
+           
+           <a href="quanlydanhmuc.php"><button type="submit">Quản lý danh mục</button></a>
+           <?php }?> 
+           <a href="quanlydonhang.php"><button type="submit">Quản lý đơn hàng</button></a>
+           </div> 
 
-<a href=""><button type="submit">Quản lý tài khoản</button></a>
-</div> 
+
+
             <div class="row">
     <div class="col-sm-6">
         <!-- Thêm ô tìm kiếm -->
@@ -59,10 +71,10 @@ input, button, select, textarea {
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Quản Lý <b>Sản Phẩm</b></h2>
+                            <h2>Quản Lý <b>Tài khoản</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="#addsanpham"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm Sản Phẩm</span></a>
+                            
                            						
                         </div>
                     </div>
@@ -125,6 +137,7 @@ input, button, select, textarea {
           
 
         </div>
+        
         <!-- Edit Modal HTML -->
         
         
@@ -226,3 +239,11 @@ input, button, select, textarea {
     <script src="js/manager.js" type="text/javascript"></script>
 </body>
 </html>
+
+<?php 
+
+
+}
+}
+
+?> 

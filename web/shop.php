@@ -59,7 +59,7 @@
             
             
             $page = isset($_GET['page']) ? $_GET['page'] : 1;
-            $sanphammoitrang = 8;
+            $sanphammoitrang = 99;
             $batdautu = ($page - 1) * $sanphammoitrang;
             $sanphamdb=new sanphamdb();
            
@@ -113,9 +113,7 @@ echo '</div>';
 </div>
 <center>
 <?php
-// ... (Các đoạn mã PHP trước đó)
 
-// Hiển thị phân trang
 
 // echo '<div class="pagination">';
 // echo '    <ul>';
@@ -124,11 +122,16 @@ echo '</div>';
 
 // for ($i = 1; $i <= ceil($totalPages / $sanphammoitrang); $i++) {
 //     if ($currentPage == $i) {
-//         echo '    <li class="active"><a href="?page=' . $i . '">' . $i . '</a></li>';
+//       if(isset($_GET['category_id']) && !isset($_GET['brand_id'])){
+//         echo '    <li class="active"><a href="?category_id='.$_GET['category_id'].'&page=' . $i . '">' . $i . '</a></li>';
+//       }elseif(isset($_GET['category_id']) && isset($_GET['brand_id'])){
+//         echo '    <li class="active"><a href="?category_id='.$_GET['category_id'].'&page=' . $i . '">' . $i . '</a></li>';
+//       }
+
 //     } else {
 //         echo '    <li><a href="?page=' . $i . '">' . $i . '</a></li>';
 //     }
-// }
+
 // echo '    </ul>';
 // echo '</div>';
 ?>

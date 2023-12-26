@@ -145,7 +145,7 @@ $tongtien+=  $sanpham['thanhtien'];
         }
     $querry=  'UPDATE `donhang` SET `tongtien` = '.$tongtien.' WHERE `donhang`.`iddonhang` = '.$iddonhang.'';
     $db->query($querry);
-        echo "Đã thêm giỏ hàng vào cơ sở dữ liệu thành công!";
+       
     }
 } else {
     echo "Lỗi khi thêm đơn hàng!";

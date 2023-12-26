@@ -37,7 +37,7 @@ if (isset($_SESSION['taikhoan'])) {
                                 
                             <?php if($taikhoan->getquanly()==1){ 
                                 
-                                  echo '  <li><a href="quanlysanpham.php"><i class="fa fa-user"></i> Trang Quản Lý</a></li>';
+                                  echo '  <li><a href="../quanly/"><i class="fa fa-user"></i> Trang Quản Lý</a></li>';
             
                      }?> 
                                     
@@ -49,7 +49,7 @@ if (isset($_SESSION['taikhoan'])) {
                                 
                                 
                             <?php if($taikhoan->getquanly()!=1 and $taikhoan->getadmin()!=1  ){?> 
-                                    <li><a href="lichsumuahang"><i class="fa fa-user"></i>Lịch Sử Mua Hàng</a></li>
+                                    <li><a href="lichsudonhang.php"><i class="fa fa-user"></i>Lịch Sử Mua Hàng</a></li>
 
                                     <?php }?> 
                                 

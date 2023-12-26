@@ -1,7 +1,13 @@
 <?php 
 require('../require.php');
-?>
+session_start();
+if(isset($_SESSION['idtk'])){
 
+$taikhoandb=new taikhoandb();
+$taikhoan=$taikhoandb->gettaikhoan($_SESSION['idtk']);
+if($taikhoan->getquanly()==1 || $taikhoan->getadmin()==1){
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,15 +50,21 @@ input, button, select, textarea {
             <a href="../web">   <button type="submit">Trở Về Trang Chủ</button></a>
            
 <a  href="quanlydanhmuc.php"><button type="submit">Quản lý danh mục</button></a>
+<?php if($taikhoan->getadmin()==1){ ?>
 
 <a href="quanlytaikhoan.php"><button type="submit">Quản lý tài khoản</button></a>
+<?php }?> 
+<a href="quanlydonhang.php"><button type="submit">Quản lý đơn hàng</button></a>
 </div> 
             <div class="row">
     <div class="col-sm-6">
-        <!-- Thêm ô tìm kiếm -->
-        <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sản phẩm...">
+    
+    <form action="" method="post">
+            <input type="text" name="txt" placeholder="Tìm kiếm...">
+            <button type="submit">Tìm kiếm</button>
+                    </form>
     </div>
-    <!-- ... (các cột khác) ... -->
+ 
 </div>
 
             <div class="table-wrapper">
@@ -71,7 +83,10 @@ input, button, select, textarea {
                 
                 <?php 
                 $sanphamdb=new sanphamdb();
+               
                 $listallsanpham=$sanphamdb->getallsanphamdesc();
+
+                if(isset($_POST['txt'])){ $listallsanpham=$sanphamdb->getsanphambyName($_POST['txt']);}
                 ?> 
                 <table class="table table-striped table-hover">
                     <thead>
@@ -232,3 +247,10 @@ input, button, select, textarea {
     <script src="js/manager.js" type="text/javascript"></script>
 </body>
 </html>
+<?php 
+}
+}else{
+
+    echo "Trang Không Tồn Tại";
+}
+?> 

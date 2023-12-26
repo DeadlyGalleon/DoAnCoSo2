@@ -167,9 +167,12 @@ echo'
 </div>
 
 
-<!-- Các phần khác của trang -->
+<?php include('footer.php'); ?> 
 
-<!-- Các file JavaScript -->
+
+
+
+
 <script src="js/ajax.js"></script>
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

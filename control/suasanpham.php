@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if (isset($_FILES['imagechitiet'])) {
+    if (isset($_FILES['imagechitiet']) && $_FILES['imagechitiet']['error'] === UPLOAD_ERR_OK) {
         $db= database::getDB();
         
         $total_images_detail = count($_FILES['imagechitiet']['name']);

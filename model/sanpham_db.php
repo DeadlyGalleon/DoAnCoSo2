@@ -410,7 +410,12 @@ return $sanpham;
 public function getsanphambyName($name){
 
     $db = database::getDB();
-    $querry = "SELECT * FROM sanpham WHERE tensanpham LIKE '%" . $name . "%'";
+    $querry = "SELECT sanpham.idsanpham, sanpham.tensanpham, sanpham.mota,sanpham.hinhanh,sanpham.giaban,sanpham.loai,sanpham.hang,loai.tenloai,hang.tenhang
+    FROM sanpham
+                      INNER JOIN loai
+                          ON loai.idloai = sanpham.loai
+                             INNER JOIN hang
+                             on sanpham.hang = hang.idhang where tensanpham LIKE '%" . $name . "%'";
     $result = $db->query($querry);
     $listsanpham=array();
     
