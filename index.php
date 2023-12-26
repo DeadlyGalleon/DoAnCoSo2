@@ -1,7 +1,7 @@
 <?php 
 
 
-header('Location: ../web');
+header('Location: ../doancoso2/web');
 exit();
 
 
