@@ -123,7 +123,7 @@ input, button, select, textarea {
                     <tr>
                         <td>ID Đơn hàng: <?php echo $donhang['thongtindonhang']['iddonhang']; ?></td>
                         <td>Được đặt bởi: <?php echo $taikhoan->gettentaikhoan() ?> </td> 
-                        <td>Số Điện Thoại: <?php echo $donhang['thongtindonhang']['sodienthoai'] ?> </td>
+                        <td>Số Điện Thoại: 0<?php echo $donhang['thongtindonhang']['sodienthoai'] ?> </td>
                         <td>Ngày Đặt hàng: </br> <?php echo $donhang['thongtindonhang']['ngaydat']; ?></td>
                         <td>Địa chỉ: <?php echo $donhang['thongtindonhang']['diachi']; ?></td>
                         <td>Trạng Thái: 
