@@ -46,8 +46,7 @@ if (isset($_GET['sanphamid'])) {
     }
 
     // Chuyển hướng người dùng sau khi thêm sản phẩm vào giỏ hàng
-    header("Location: ../trangchu/shop.php");
-    exit();
+   
 } else {
     echo "Không có sản phẩm được chọn để thêm vào giỏ hàng";
 }

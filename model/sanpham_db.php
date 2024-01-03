@@ -53,6 +53,33 @@ public function getallsanpham(){
     }
     return $listsanpham;
     }
+
+    public function getsanphammoi(){
+        $db = database::getDB();
+        $querry='SELECT sanpham.idsanpham, sanpham.tensanpham, sanpham.mota,sanpham.hinhanh,sanpham.giaban,sanpham.loai,sanpham.hang,loai.tenloai,hang.tenhang
+        FROM sanpham
+                          INNER JOIN loai
+                              ON loai.idloai = sanpham.loai
+                                 INNER JOIN hang
+                                 on sanpham.hang = hang.idhang order by sanpham.idsanpham desc limit 6 offset 0 '  ;
+        $result = $db->query($querry);
+        $listsanpham=array();
+        
+        foreach($result as $row){
+            $sanpham=new sanpham();
+                $sanpham->setidsanpham($row['idsanpham']);
+                $sanpham->settensanpham($row['tensanpham']);
+                $sanpham->setmota($row['mota']);
+                $sanpham->sethinhanh($row['hinhanh']);
+                $sanpham->setgiaban($row['giaban']);
+                $sanpham->setloai($row['loai']);
+                $sanpham->sethang($row['hang']);
+                $sanpham->settenloai($row['tenloai']);
+                $sanpham->settenhang($row['tenhang']);
+        $listsanpham[]=$sanpham;
+        }
+        return $listsanpham;
+        }
     
 public function getallsanphamdesc(){
     $db = database::getDB();
@@ -220,20 +247,22 @@ $listsanpham[]=$sanpham;
 }
 return $listsanpham;
 }
-public function getallsanphambyloai($loai){
+public function getallsanphambyloai($loai) {
     $db = database::getDB();
-$querry='SELECT sanpham.idsanpham, sanpham.tensanpham, sanpham.mota,sanpham.hinhanh,sanpham.giaban,sanpham.loai,sanpham.hang,loai.tenloai,hang.tenhang
-FROM sanpham
-                  INNER JOIN loai
-                      ON loai.idloai = sanpham.loai
-                         INNER JOIN hang
-                         on sanpham.hang = hang.idhang
-                         WHERE loai='.$loai.'';
-$result = $db->query($querry);
-$listsanpham=array();
+    $querry = 'SELECT sanpham.idsanpham, sanpham.tensanpham, sanpham.mota, sanpham.hinhanh, sanpham.giaban, sanpham.loai, sanpham.hang, loai.tenloai, hang.tenhang
+    FROM sanpham
+    INNER JOIN loai ON loai.idloai = sanpham.loai
+    INNER JOIN hang ON sanpham.hang = hang.idhang
+    WHERE loai = :loai';
 
-foreach($result as $row){
-    $sanpham=new sanpham();
+    $stmt = $db->prepare($querry);
+    $stmt->bindParam(':loai', $loai);
+    $stmt->execute();
+    
+    $listsanpham = array();
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $sanpham = new sanpham();
         $sanpham->setidsanpham($row['idsanpham']);
         $sanpham->settensanpham($row['tensanpham']);
         $sanpham->setmota($row['mota']);
@@ -243,10 +272,12 @@ foreach($result as $row){
         $sanpham->sethang($row['hang']);
         $sanpham->settenloai($row['tenloai']);
         $sanpham->settenhang($row['tenhang']);
-$listsanpham[]=$sanpham;
+        $listsanpham[] = $sanpham;
+    }
+    
+    return $listsanpham;
 }
-return $listsanpham;
-}
+
 
 
 public function getsanhambyhang($hang,$sanphammoitrang,$batdautu){

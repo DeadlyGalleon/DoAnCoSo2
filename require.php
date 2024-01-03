@@ -12,6 +12,10 @@ require('model/DAO_DB.php');
 require('model/sanphamdonhang.php');
 require('model/taikhoan.php');
 require('model/taikhoan_db.php');
+require('model/giohang.php');
+require('model/giohang_db.php');
+require('model/danhgia.php');
+require('model/danhgia_db.php');
 
 
 ?> 
